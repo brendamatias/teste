@@ -1,0 +1,15 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: apps/backend/Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - $GOOGLE_APPLICATION_CREDENTIALS:/usr/src/app/firebase-credentials.json
+      - ./apps/backend:/usr/src/app/apps/backend
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/usr/src/app/firebase-credentials.json
+      - JWT_SECRET=$JWT_SECRET
+  
+    

@@ -1,0 +1,14 @@
+node_modules
+.firebase
+.github
+.vscode
+.VSCodeCounter
+gcloud_sql
+public
+dist
+.editorconfig
+.prettierignore
+.prettierrc
+.runtimeconfig.json
+commitlint.config.js
+databases

@@ -1,0 +1,59 @@
+<div class="flex flex-col items-center">
+  <div class="w-full max-w-3xl bg-white shadow-lg rounded-lg">
+    <div class="flex items-center justify-between bg-blue-500 text-white px-6 py-4 rounded-t-lg">
+      <button class="flex items-center text-white hover:text-gray-200 transition" routerLink="../">
+        <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        Voltar
+      </button>
+      <h2 class="text-xl font-bold">{{ todo ? todo.title : '' }}</h2>
+      <div class="w-16"></div>
+    </div>
+
+    <div class="p-8">
+      @if (todo) {
+      <!-- Lista de Tasks -->
+      <ul cdkDropList (cdkDropListDropped)="onDrop($event)" class="space-y-2">
+        @for (item of todo.items; track $index; let i = $index) {
+        <li cdkDrag class="flex items-center bg-gray-100 p-3 rounded-lg shadow-sm border border-gray-300">
+          <!-- Checkbox -->
+          <input type="checkbox" [(ngModel)]="item.isCompleted" class="mr-3 h-5 w-5 cursor-pointer"
+            (ngModelChange)="toggleTodoItemCompletion(item.id)" />
+
+          <div class="flex-1 mr-2">
+            @if (!item.isEditing) {
+            <span class="text-gray-800 cursor-pointer" [ngClass]="{ 'line-through text-gray-400': item.isCompleted }"
+              (dblclick)="startEditing(item)">
+              {{ item.content }}
+            </span>
+            } @else {
+            <input #editInput [(ngModel)]="updatedItemContent" class="w-full p-1 border rounded-md"
+              (blur)="onBlur(item)" (keydown.enter)="stopEditing(item)" />
+            }
+          </div>
+
+          <!-- Botões de Ações -->
+          <div class="flex space-x-2">
+            <button class="text-red-500 hover:text-red-700" (click)="deleteTodoItem(item.id, i)">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        </li>
+        }
+      </ul>
+      }
+      <!-- Adicionar nova tarefa -->
+      <div class="mt-4 flex items-center">
+        <input [(ngModel)]="newItemContent" placeholder="Adicione uma nova tarefa..."
+          class="flex-1 border border-gray-300 p-2 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-500"
+          (keydown.enter)="addTodoItem()" />
+        <button (click)=" addTodoItem()"
+          class="ml-3 bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600">
+          Adicionar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

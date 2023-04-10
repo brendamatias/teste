@@ -1,0 +1,55 @@
+<div class="flex flex-col items-center">
+  <div class="w-full max-w-3xl bg-white shadow-lg rounded-lg p-8">
+    <h2 class="text-2xl font-bold text-gray-800 text-center mb-4">Suas listas de tarefas</h2>
+
+    <!-- Lista de Todos -->
+    <div class="space-y-4">
+      @for (todo of todos; track $index) {
+      <div class=" flex justify-between bg-neutral-light rounded-md shadow-sm hover:bg-neutral-300 transition">
+        <div class="cursor-pointer flex-1  p-4" [routerLink]="[todo.id]">
+          <p class="text-lg text-gray-800">{{ todo.title }}</p>
+        </div>
+
+        @if(user.userId === todo.ownerId) {
+        <button class="text-primary hover:text-primary-dark mr-4" (click)="openShareModal(todo)">
+          <i class="fas fa-share-alt"></i>
+        </button>
+        }
+      </div>
+      }
+
+    </div>
+
+    <div class="mt-4 flex items-center">
+      <input [(ngModel)]="newTodoTitle" placeholder="Adicione uma nova lista de tarefas..."
+        class="flex-1 border border-gray-300 p-2 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-500"
+        (keydown.enter)="addTodo()" />
+      <button (click)="addTodo()" class="ml-3 bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600">
+        Adicionar
+      </button>
+    </div>
+  </div>
+</div>
+
+
+@if(isModalOpen) {
+<div class="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center">
+  <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+    <h3 class="text-xl font-bold text-gray-800 mb-4">Compartilhar {{ todoToShare?.title }}</h3>
+    <form [formGroup]="form" (ngSubmit)="shareTodo()">
+      <app-input id="email" type="email" label="Insira o e-mail para compartilhar a lista" placeholder="you@example.com"
+        formControlName="email" errorMessage="Digite um e-mail válido"></app-input>
+    </form>
+
+    <div class="flex mt-4 justify-end">
+      <button (click)="closeShareModal()"
+        class="bg-gray-500 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-600 mr-2">
+        Fechar
+      </button>
+      <button (click)="shareTodo()" class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600">
+        Compartilhar
+      </button>
+    </div>
+  </div>
+</div>
+}

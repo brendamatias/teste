@@ -1,0 +1,10 @@
+.task-item {
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.task-item:active {
+  transform: scale(0.98);
+}
+
+/* Ajuste no item arrastado para não quebrar o layout */

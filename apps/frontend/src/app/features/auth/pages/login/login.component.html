@@ -1,0 +1,32 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100 p-4 sm:p-0">
+  <div class="w-full max-w-md bg-white shadow-lg rounded-lg p-8">
+    <h2 class="text-2xl font-bold text-gray-800 text-center mb-4">Bem-vindo!</h2>
+    <p class="text-sm text-gray-600 text-center mb-8">
+      Faça login para continuar com o TodoList.
+    </p>
+    <form [formGroup]="loginForm">
+      <app-input
+        id="email"
+        type="email"
+        label="Email"
+        placeholder="you@example.com"
+        formControlName="email"
+        errorMessage="Email é obrigatório e deve ser um email válido"
+      ></app-input>
+
+      <app-input
+        id="password"
+        type="password"
+        label="Senha"
+        placeholder="••••••••"
+        formControlName="password"
+        class="mb-1"
+        errorMessage="Senha é obrigatória e deve ter no mínimo 8 caracteres"
+      ></app-input>
+
+      <div class="mt-4">
+        <app-button (click)="login()">Login</app-button>
+      </div>
+    </form>
+  </div>
+</div>
