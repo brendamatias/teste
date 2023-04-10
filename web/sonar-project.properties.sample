@@ -1,0 +1,12 @@
+sonar.projectName=evibbra_web
+sonar.projectKey=evibbra_web
+sonar.host.url=http://localhost:9000
+sonar.login=5be62fb6dfee51dfeef983f4b737726d17ba576e
+sonar.sources=src
+sonar.exclusions=**/node_modules/**,**/*.spec.ts
+sonar.projectVersion=1.0
+sonar.sourceEncoding=UTF-8
+sonar.typescript.lcov.reportPaths=coverage/lcov.info
+sonar.ts.tslint.outputPath=issues.json
+sonar.ts.tslint.configPath=tslint.json
+sonar.qualitygate.wait=true

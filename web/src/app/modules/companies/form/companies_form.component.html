@@ -1,0 +1,81 @@
+<p-confirmDialog></p-confirmDialog>
+<form [formGroup]="company" (ngSubmit)="onSave()" novalidate>
+  <div class="grid">
+    <div class="col-12">
+      <div class="card">
+        <div class="grid">
+          <div class="col-1"></div>    
+          <div class="col-2">
+            <div class="flex flex-column gap-2">
+              <label for="cnpj">CNPJ</label>
+              <input
+                pInputText
+                id="cnpj"
+                aria-describedby="cnpj-help"
+                formControlName="cnpj"
+              />
+              <small
+                class="p-error block"
+                *ngIf="
+                  company.get('cnpj')?.invalid && company.get('cnpj')?.dirty
+                "
+              >
+                Obrigatório informar o CNPJ da empresa</small
+              >
+            </div>
+          </div>      
+          <div class="col-3">
+            <div class="flex flex-column gap-2">
+              <label for="name">Nome da Empresa</label>
+              <input
+                pInputText
+                id="name"
+                aria-describedby="name-help"
+                formControlName="name"
+              />
+              <small
+                class="p-error block"
+                *ngIf="
+                  company.get('name')?.invalid && company.get('name')?.dirty
+                "
+              >
+                Obrigatório informar o nome da empresa</small
+              >
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="flex flex-column gap-2">
+              <label for="legalName">Razão Social</label>
+              <input
+                pInputText
+                id="legalName"
+                aria-describedby="legalName-help"
+                formControlName="legalName"
+              />
+              <small
+                class="p-error block"
+                *ngIf="
+                  company.get('legalName')?.invalid && company.get('legalName')?.dirty
+                "
+              >
+                Obrigatório informar a razão social da empresa</small
+              >
+            </div>
+          </div>          
+        </div>
+        <div class="flex flex-row-reverse flex-wrap">
+          <div class="col-2"></div>
+          <button
+            pButton
+            pRipple
+            [icon]="id ? 'pi pi-save' : 'pi pi-plus'"
+            type="submit"
+            [label]="id ? 'Salvar' : 'Incluir'"
+            class="p-button-success m-2"
+            [disabled]="company.invalid"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

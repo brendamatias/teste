@@ -1,0 +1,27 @@
+<div class="layout-topbar">
+  <a class="layout-topbar-logo" [routerLink]="['/dashboard']">
+    <img src="assets/images/logo.png" alt="logo" />
+  </a>
+
+  <p-menubar [model]="routeItems" />
+
+  <div
+    #topbarmenu
+    class="layout-topbar-menu"
+    [ngClass]="{
+      'layout-topbar-menu-mobile-active':
+        layoutService.state.profileSidebarVisible
+    }"
+  >
+    
+    <p-avatar
+      label="{{ user }}"
+      styleClass="mr-2"
+      size="large"
+      shape="circle"
+      [style]="{ 'background-color': 'var(--primary-color)', color: '#ffffff' }"
+      (click)="menu.toggle($event)"
+    ></p-avatar>
+    <p-menu #menu [model]="items" [popup]="true"></p-menu>
+  </div>
+</div>

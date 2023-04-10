@@ -1,0 +1,62 @@
+<p-confirmDialog></p-confirmDialog>
+<form [formGroup]="category" (ngSubmit)="onSave()" novalidate>
+  <div class="grid">
+    <div class="col-12">
+      <div class="card">
+        <div class="grid">
+          <div class="col-1"></div>
+          <div class="col-5">
+            <div class="flex flex-column gap-2">
+              <label for="name">Categoria</label>
+              <input
+                pInputText
+                id="name"
+                aria-describedby="name-help"
+                formControlName="name"
+              />
+              <small
+                class="p-error block"
+                *ngIf="
+                  category.get('name')?.invalid && category.get('name')?.dirty
+                "
+              >
+                Obrigatório informar o nome da categoria</small
+              >
+            </div>
+          </div>
+          <div class="col-5">
+            <div class="flex flex-column gap-2">
+              <label for="description">Descrição</label>
+              <input
+                pInputText
+                id="description"
+                aria-describedby="description-help"
+                formControlName="description"
+              />
+              <small
+                class="p-error block"
+                *ngIf="
+                  category.get('description')?.invalid && category.get('description')?.dirty
+                "
+              >
+                Obrigatório informar a descrição da categoria</small
+              >
+            </div>
+          </div>          
+        </div>
+        <div class="flex flex-row-reverse flex-wrap">
+          <div class="col-1"></div>
+          <button
+            pButton
+            pRipple
+            [icon]="id ? 'pi pi-save' : 'pi pi-plus'"
+            type="submit"
+            [label]="id ? 'Salvar' : 'Incluir'"
+            class="p-button-success m-2"
+            [disabled]="category.invalid"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,106 @@
+<p-confirmDialog></p-confirmDialog>
+<form [formGroup]="filter" novalidate>
+  <div class="grid">
+    <div class="col-12">
+      <div class="card p-fluid">
+        <div class="grid">
+        <div class="col-6 md:col-4">
+          <div class="field grid">
+            <label for="compentenceYear">Ano de Referência</label>
+            <div class="col-6 md:col-4">
+              <p-calendar
+                id="compentenceYear"
+                formControlName="compentenceYear"
+                [readonlyInput]="true"
+                view="year"
+                [maxDate]="lastYear"
+                dateFormat="yy"
+                class="max-w-full"
+                (ngModelChange)="init()"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-0 md:col-5"></div>
+        <div class="col-6 md:col-3">
+          <div class="flex flex-row justify-between">
+            <button
+              pButton
+              pRipple
+              icon="pi pi-plus"
+              type="button"
+              label="Lançar Nota Fiscal"
+              class="p-button-success m-2"
+              [routerLink]="['invoices/form']"
+            ></button>
+            <button
+              pButton
+              pRipple
+              icon="pi pi-plus"
+              type="button"
+              label="Lançar Despesas"
+              class="p-button-success m-2"
+              [routerLink]="['expenses/form']"
+            ></button>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <h5>Indicador de faturamento anual</h5>
+      <div class="card flex justify-content-center">
+        <p-chart
+          type="doughnut"
+          [data]="availableInvoiceAmount.data"
+          [options]="availableInvoiceAmount.options"
+        />
+      </div>
+    </div>
+
+    <div class="col-4">
+      <h5>Notas Fiscais Cadastradas</h5>
+      <div class="card justify-content-center">
+        <p-chart
+          type="bar"
+          [data]="totalInvoiceAmounts.data"
+          [options]="totalInvoiceAmounts.options"
+        />
+      </div>
+    </div>
+
+    <div class="col-4">
+      <h5>Despesas Cadastradas</h5>
+      <div class="card justify-content-center">
+        <p-chart
+          type="bar"
+          [data]="totalExpenseAmounts.data"
+          [options]="totalExpenseAmounts.options"
+        />
+      </div>
+    </div>
+
+    <div class="col-4">
+      <h5>Balanço de Receitas e Despesas</h5>
+      <div class="card justify-content-center">
+        <p-chart
+          type="bar"
+          [data]="monthlyBalance.data"
+          [options]="monthlyBalance.options"
+        />
+      </div>
+    </div>
+
+    <div class="col-4">
+      <h5>Despesas por Categorias</h5>
+      <div class="card justify-content-center">
+        <p-chart
+          type="bar"
+          [data]="expensesCategory.data"
+          [options]="expensesCategory.options"
+        />
+      </div>
+    </div>
+  </div>
+</form>

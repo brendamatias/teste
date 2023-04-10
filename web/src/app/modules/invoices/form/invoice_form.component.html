@@ -1,0 +1,164 @@
+<p-confirmDialog></p-confirmDialog>
+<form [formGroup]="invoice" (ngSubmit)="onSave()" novalidate>
+  <div class="grid">
+    <div class="col-12">
+      <div class="card">
+        <div class="grid">
+          <div class="col-1"></div>
+          <div class="col-4">
+            <div class="flex flex-column gap-2">
+              <label for="company">Empresa</label>
+              <p-dropdown
+                id="company"
+                [options]="companies"
+                optionLabel="name"
+                optionValue="id"
+                formControlName="company"
+                [filter]="true"
+                [filterFields]="utils.filterCompaniesFields"
+                [showClear]="true"
+                placeholder="Selecionar a empresa"
+                class="drop-full w-full"
+              >
+                <ng-template let-c pTemplate="item">
+                  <div class="flex align-items-center gap-2">
+                    <div>{{ c.name }} ({{ utils.formatDocument(c.cnpj) }})</div>
+                  </div>
+                </ng-template>
+              </p-dropdown>
+              <small
+                class="p-error block"
+                *ngIf="
+                  invoice.get('company')?.invalid && invoice.get('company')?.dirty
+                "
+              >
+                Obrigatório informar a empresa</small
+              >
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="flex flex-column gap-2">
+              <label for="amount">Valor da Nota Fiscal</label>
+              <input
+                pInputText
+                id="amount"
+                aria-describedby="amount-help"
+                formControlName="amount"
+              />
+              <small
+                class="p-error block"
+                *ngIf="
+                  invoice.get('amount')?.invalid && invoice.get('amount')?.dirty
+                "
+              >
+                Obrigatório informar o valor da nota fiscal</small
+              >
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="flex flex-column gap-2">
+              <label for="number">Número da Nota Fiscal</label>
+              <input
+                pInputText
+                id="number"
+                aria-describedby="number-help"
+                formControlName="number"
+              />
+              <small
+                class="p-error block"
+                *ngIf="
+                  invoice.get('number')?.invalid && invoice.get('number')?.dirty
+                "
+              >
+                Obrigatório informar o número da nota fiscal</small
+              >
+            </div>
+          </div>
+          <div class="col-2"></div>
+          <div class="col-1">&nbsp;</div>
+          <div class="col-9">
+            <div class="flex flex-column gap-2">
+              <label for="serviceDescription">Descrição do serviço</label>
+              <input
+                pInputText
+                id="serviceDescription"
+                aria-describedby="serviceDescription-help"
+                formControlName="serviceDescription"
+              />
+              <small
+                class="p-error block"
+                *ngIf="
+                  invoice.get('serviceDescription')?.invalid &&
+                  invoice.get('serviceDescription')?.dirty
+                "
+              >
+                Obrigatório informar a descrição do serviço</small
+              >
+            </div>
+          </div>
+          <div class="col-2"></div>
+          <div class="col-1"></div>
+          <div class="col-2">
+            <div class="flex flex-column gap-2">
+              <label for="competence">Competência</label>
+              <p-calendar
+                id="competence"
+                aria-describedby="competence-help"
+                formControlName="competence"
+                [readonlyInput]="true"
+                view="month"
+                [maxDate]="maxDate"
+                dateFormat="mm/yy"
+                class="max-w-full"
+              />
+              <small
+                class="p-error block"
+                *ngIf="
+                  invoice.get('competence')?.invalid &&
+                  invoice.get('competence')?.dirty
+                "
+              >
+                Obrigatório informar a competência da nota fiscal</small
+              >
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="flex flex-column gap-2">
+              <label for="paymentDate">Data de pagamento</label>
+              <p-calendar
+                id="paymentDate"
+                aria-describedby="paymentDate-help"
+                formControlName="paymentDate"
+                [readonlyInput]="true"
+                view="date"
+                dateFormat="dd/mm/yy"
+                class="max-w-full"
+              />
+              <small
+                class="p-error block"
+                *ngIf="
+                  invoice.get('paymentDate')?.invalid &&
+                  invoice.get('paymentDate')?.dirty
+                "
+              >
+                Obrigatório informar a data de pagamento da nota fiscal</small
+              >
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-row-reverse flex-wrap">
+          <div class="col-2"></div>
+          <button
+            pButton
+            pRipple
+            [icon]="id ? 'pi pi-save' : 'pi pi-plus'"
+            type="submit"
+            [label]="id ? 'Salvar' : 'Incluir'"
+            class="p-button-success m-2"
+            [disabled]="invoice.invalid"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

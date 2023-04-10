@@ -1,0 +1,54 @@
+<p-confirmDialog></p-confirmDialog>
+<form [formGroup]="preference" (ngSubmit)="onSave()" novalidate>
+  <div class="grid">
+    <div class="col-12">
+      <div class="card">
+        <div class="grid">
+          <div class="col-2"></div>
+          <div class="col-2">
+            <div class="flex flex-column gap-2">
+              <label for="annualInvoiceLimit">Limite máximo de faturamento de MEI</label>
+              <input
+                pInputText
+                id="annualInvoiceLimit"
+                aria-describedby="annualInvoiceLimit-help"
+                formControlName="annualInvoiceLimit"
+              />
+              <small
+                class="p-error block"
+                *ngIf="
+                  preference.get('annualInvoiceLimit')?.invalid && preference.get('annualInvoiceLimit')?.dirty
+                "
+              >
+                Obrigatório informar o limite máximo de faturamento</small
+              >
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="flex flex-column gap-2">
+              <label for="emailNotificationsEnabled">Habilitar notificação via E-mail?</label>
+              <p-inputSwitch formControlName="emailNotificationsEnabled" />
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="flex flex-column gap-2">
+              <label for="smsNotificationsEnabled">Habilitar notificação via SMS?</label>
+              <p-inputSwitch formControlName="smsNotificationsEnabled" />
+            </div>
+          </div>
+          <div class="col-2">
+            <button
+            pButton
+            pRipple
+            icon="pi pi-save"
+            type="submit"
+            label="Salvar"
+            class="p-button-success m-2"
+            [disabled]="preference.invalid"
+          ></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

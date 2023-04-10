@@ -1,0 +1,70 @@
+spring:
+  datasource:
+    driverClassName: org.postgresql.Driver
+    password: evibbra
+    username: evibbra
+    url: jdbc:postgresql://db:5432/dbevibbra
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    defer-datasource-initialization: 'true'
+    show-sql: 'false'
+    open-in-view: 'false'
+  application:
+    name: eVibbra-API
+management:
+  tracing:
+    enabled: 'false'
+    propagation:
+      type: w3c
+    baggage:
+      enabled: 'true'
+    sampling:
+      probability: '1.0'
+  metrics:
+    use-global-registry: 'true'
+  endpoint:
+    health:
+      show-details: always
+  zipkin:
+    tracing:
+      endpoint: http://${zipkin.host}/api/v2/spans
+  endpoints:
+    web:
+      exposure:
+        include: health, info, prometheus
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    server: /
+    url: ${springdoc.swagger-ui.server}v3/api-docs
+logging:
+  pattern:
+    level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
+  level:
+    com:
+      netflix:
+        discovery:
+          shared:
+            resolver:
+              aws:
+                ConfigClusterResolver: WARN
+zipkin:
+  host: localhost:9411
+api:
+  security:
+    token:
+      secret: ${JWT_SECRET:12345678}
+cors:
+  urls: http://localhost:4200,http://localhost,http://195.35.17.133
+mailersend:
+  api:
+    token: mlsn.b9041e715c2c669da9fa4d468c98946c913e302e0382eec49bebc41c28890860
+  from: 
+    name: 'eVibbra NFe'
+    mail: 'bsdev@trial-pr9084z2n6v4w63d.mlsender.net'
+textbelt:
+  api:
+    url: https://textbelt.com/text
+    key: 7e82f346dd95360b604214680add792769d2ed46yOV09R6GZZHJhefM6FYYS4Z07
